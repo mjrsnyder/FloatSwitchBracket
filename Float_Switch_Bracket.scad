@@ -7,18 +7,20 @@ length=60;
 width=25;
 switchRadius=5;
 switchArmLength=30;
+screwSize=5;
 
-module riser_base(length, width) {
+module riser_base(length, width, screwSize) {
+    screwRadius=screwSize / 2;
     difference () {
         cube([length,width,5]);
-        translate ([7.5,(width -5)/2,0]) {
-            cube([length - 20,5,5]);
+        translate ([7.5,(width -screwSize)/2,0]) {
+            cube([length - 20,screwSize,5]);
         }
         translate([7.5,width/2,0]){
-            cylinder(r=2.5, h=5);
+            cylinder(r=screwRadius, h=5);
         }
         translate([length -12.5 ,width/2,0]){
-            cylinder(r=2.5, h=5);
+            cylinder(r=screwRadius, h=5);
         }
     }
 }
@@ -37,7 +39,7 @@ module switch_holder(width, length, holeRadius) {
 
 
 
-riser_base(length,width);
+riser_base(length,width,screwSize);
 
 translate([length,0,5]) {
     rotate(a=270, v=[0,1,0]) {
